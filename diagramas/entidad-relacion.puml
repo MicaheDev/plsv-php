@@ -1,0 +1,150 @@
+@startuml
+skinparam roundcorner 5
+skinparam linetype ortho
+
+entity Usuario {
+    * id_usuario : INT (PK)
+    --
+    * nombre_usuario : VARCHAR(128)
+    * contraseña : VARCHAR(256)
+    * rol : VARCHAR(50)
+}
+
+entity Cuenta {
+    * id_cuenta : INT (PK)
+    --
+    * id_usuario : INT (FK)
+    * id_nivel_actual : INT (FK)
+    * vidas : INT
+    ultima_vida_perdida : DATETIME
+    * experiencia_total : INT
+    * fecha_de_creacion : DATE
+}
+
+entity Preferencia {
+    * id_preferencia : INT (PK)
+    --
+    * id_cuenta : INT (FK)
+    * nivel_dificultad : VARCHAR(50) ' Fácil, Medio, Difícil
+    * ajuste_autismo : BOOLEAN ' Ajustes de contraste/paletas para la interfaz
+    religion_filtro : VARCHAR(100) ' Para omitir o mostrar contenido específico
+}
+
+entity Progreso_Leccion {
+    * id_cuenta : INT (PK, FK)
+    * id_leccion : INT (PK, FK)
+    --
+    * completado : BOOLEAN
+    * fecha_completado : DATETIME
+}
+
+entity Nivel {
+    * id_nivel : INT (PK)
+    --
+    * codigo : VARCHAR(10) ' A1, A2, etc.
+    * name : VARCHAR(128)
+    * experiencia_requerida : INT
+}
+
+entity Seccion {
+    * id_seccion : INT (PK)
+    --
+    * id_nivel : INT (FK)
+    * title : VARCHAR(128)
+    * position : INT
+}
+
+entity Unidad {
+    * id_unidad : INT (PK)
+    --
+    * id_seccion : INT (FK)
+    * about : VARCHAR(128)
+    * position : INT
+}
+
+entity Grupo_Lecciones {
+    * id_grupo_lecciones : INT (PK)
+    --
+    * id_unidad : INT (FK)
+    * position : INT 
+    * title : VARCHAR(128)
+}
+
+entity Leccion {
+    * id_leccion : INT (PK)
+    --
+    * id_grupo_lecciones : INT (FK)
+    * id_tipo_de_leccion : INT (FK)
+    * contenido_didactico : TEXT 
+    * experiencia_otorgada : INT
+    * es_examen_ubicacion : BOOLEAN 
+    religion_restriccion : VARCHAR(100) 
+}
+
+entity Tipo_de_Leccion {
+    * id_tipo_de_leccion : INT (PK)
+    --
+    * name : VARCHAR(128) 
+}
+
+entity Contenido {
+    * id_leccion : INT (PK, FK)
+    * id_seña : INT (PK, FK)
+}
+
+entity Seña {
+    * id_seña : INT (PK)
+    --
+    * id_recurso : INT (FK)
+    * id_categoria : INT (FK)
+    * codigo_seña : INT
+    * significado : VARCHAR(128)
+}
+
+entity Categoria_Seña {
+    * id_categoria : INT (PK)
+    --
+    * nombre_area : VARCHAR(128) 
+}
+
+entity Recurso {
+    * id_recurso : INT (PK)
+    --
+    * id_tipo_de_recurso : INT (FK)
+    * ruta_archivo : VARCHAR(255) 
+}
+
+entity Tipo_de_Recursos {
+    * id_tipo_de_recurso : INT (PK)
+    --
+    * tipo : VARCHAR(128) 
+}
+
+' --- RELACIONES CORREGIDAS (Muchos a la izquierda, Uno a la derecha) ---
+
+' Autenticación, Perfil y Configuración
+Usuario ||..|| Cuenta
+Preferencia ||..|| Cuenta
+
+' Historial y Progreso
+Progreso_Leccion }|..|| Cuenta
+Progreso_Leccion }|..|| Leccion
+Cuenta }|..|| Nivel
+
+' Estructura Curricular
+Seccion }|..|| Nivel
+Unidad }|..|| Seccion
+Grupo_Lecciones }|..|| Unidad
+Leccion }|..|| Grupo_Lecciones
+Leccion }|..|| Tipo_de_Leccion
+
+' Contenido de la Lección (Muchos a Muchos)
+Contenido }|..|| Leccion
+Contenido }|..|| Seña
+
+' Diccionario de Señas y Multimedia
+Seña }|..|| Categoria_Seña
+Seña }|..|| Recurso
+Recurso }|..|| Tipo_de_Recursos
+
+@enduml
