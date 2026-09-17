@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $user = $_SESSION["user"] ?? null;
 ?>
 
-<header class="h-[60px] w-full shrink-0">
+<header class="h-[60px] w-full shrink-0 flex">
 
     <div class="w-full h-full max-w-2xl mx-auto bg-white px-4 flex items-center max-lg:justify-center">
 

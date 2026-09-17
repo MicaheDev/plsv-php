@@ -17,13 +17,16 @@ $title = "Iniciar Sesión";
 
 ob_start();
 ?>
-<div class="w-full flex flex-col max-w-2xl mx-auto">
-  <form class="flex flex-col" action="/plsv/controladores/validar_usuario.php" method="POST">
+<div class="w-full h-full flex flex-col justify-center items-center max-w-2xl mx-auto p-4">
+  <form class="w-full h-full flex flex-col justify-center max-lg:justify-between gap-4" action="/plsv/controladores/validar_usuario.php" method="POST">
 
-    <h2 class="titulo-login">Iniciar Sesión</h2>
+    <div class="flex flex-col gap-4">
+      <h2 class="text-3xl font-black text-center">Iniciar Sesión</h2>
 
-    <div class="contenedor-campo">
-      <label for="usuario">Nombre Usuario</label>
+      <p class="text-gray-700 text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, non?</p>
+
+    <div class="flex flex-col gap-2">
+      <label class="font-black" for="usuario">Nombre Usuario</label>
       <input
         class="input"
         type="text"
@@ -34,8 +37,8 @@ ob_start();
         placeholder="Ej: Usuario1234" />
     </div>
 
-    <div class="contenedor-campo">
-      <label for="contraseña">Contraseña:</label>
+    <div class="flex flex-col gap-2">
+      <label class="font-black" for="contraseña">Contraseña:</label>
       <input
         class="input"
         type="password"
@@ -45,11 +48,10 @@ ob_start();
         minlength="4"
         placeholder="Ej: 1234" />
     </div>
+    </div>
 
 
-    <div class="w-full flex flex-row gap-2 max-lg:flex-col justify-center">
-
-      <div class="flex flex-col gap-2">
+    <div class="w-full flex flex-row-reverse gap-3 max-lg:flex-col justify-center">
         <div class="button-wrapper w-full">
           <button class="button bg-blue-500 text-white w-full" type="submit">Ingresar</button>
         </div>
@@ -57,7 +59,6 @@ ob_start();
         <div class="button-wrapper w-full">
           <a class="button bg-white text-blue-800 w-full" href="/plsv/vistas/registro.php">Crear una cuenta</a>
         </div>
-      </div>
     </div>
   </form>
 </div>

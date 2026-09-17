@@ -23,7 +23,7 @@
     }
 
     @utility button {
-     @apply  border-2 border-blue-800 inline-flex items-center justify-center -translate-y-1 hover:translate-y-0 active:translate-y-0 transition-transform text-nowrap px-4 py-2 uppercase font-bold rounded-2xl;
+     @apply  border-2 cursor-pointer border-blue-800 inline-flex items-center justify-center -translate-y-1 hover:translate-y-0 active:translate-y-0 transition-transform text-nowrap px-4 py-2 uppercase font-bold rounded-2xl;
     }
 
     @utility button-wrapper {
@@ -41,11 +41,13 @@
 
     <?php require __DIR__ . '/header.php'; ?>
 
-    <main class="w-full h-full flex flex-col">
+    <main class="flex-1 flex flex-col overflow-hidden overflow-y-auto">
         <?= $content ?? '' ?>
     </main>
 
-    <?php require __DIR__ . '/footer.php'; ?>
+    <?php 
+    // require __DIR__ . '/footer.php'; 
+    ?>
 
 </body>
 

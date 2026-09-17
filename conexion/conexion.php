@@ -12,9 +12,9 @@ class Database
     {
         // Configuración de la base de datos (puedes cambiar estos valores)
         $host     = 'localhost';
-        $db       = 'plsv_en';
+        $db       = 'plsv';
         $user     = 'root';
-        $password = 'root';
+        $password = '';
         $charset  = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
